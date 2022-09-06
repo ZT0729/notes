@@ -274,7 +274,35 @@ HEAD 部分表示我们当前位置，下面就是合并过来的内容。也就
 
 最后就可以点击 commit new file，相当于执行了 `git add ` 和 `git commit`。
 
-### 5.2克隆远程仓库到本地仓库
+
+
+### 5.2设置ssh免密登录
+
+配置好后 ssh 就不用在提示需要登录。
+
+找到本地 git 生成的公钥，用编辑器打开将内容复制。
+
+打开你的 github 主页，进入个人设置 -> SSH and GPG keys -> New SSH key，把复制的内容粘贴进去，title 随便填，保存即可，我们的公钥就添加成功了，设置好如下图
+
+![image-20220905225902958](https://zt0729-picture-bed.oss-cn-beijing.aliyuncs.com/ii/image-20220905225902958.png)
+
+检测是否设置成功：
+
+输入命令：   
+
+```shell
+ssh -T git@github.com 
+```
+
+如果提示 Are you sure you want to continue connecting (yes/no)?，输入 yes，然后会看到：
+
+Hi xxx! You've successfully authenticated, but GitHub does not provide shell access.
+
+看到这个信息说明SSH已配置成功！ 
+
+
+
+### 5.3 克隆远程仓库到本地仓库
 
 假设要把本地仓库复制到本地，可以点击仓库 Code 按钮，如果我们直接选择 Download 就只会下载当前最新版本的文件，而其中的版本历史和记录不会下载。![image-20220825210045625](https://zt0729-picture-bed.oss-cn-beijing.aliyuncs.com/ii/image-20220825210045625.png)也就是压缩文件里没有 .git 文件夹的，那就肯定要用 Clone 了，直接在 https 下链接旁旁边点击赋值按钮，就可以把连接复制下来。接着在git bash 命令行直接使用 `git clone + 刚刚的连接`就可以拷贝远程仓库了
 
@@ -286,7 +314,7 @@ HEAD 部分表示我们当前位置，下面就是合并过来的内容。也就
 
 现在在 linn.md上新增一行内容，并 commit 提交下。
 
-### 5.3 查看本地厂仓库与那些厂库有联系
+### 5.4 查看本地厂仓库与那些厂库有联系
 
 先用 `git remote -v` 来查看下本地仓库和那些远程仓库有联系，因为是刚刚从 Github 上复制下来当然就会显示那个 Github 远程仓库的地址了。
 
@@ -294,7 +322,7 @@ HEAD 部分表示我们当前位置，下面就是合并过来的内容。也就
 
 origin 代表远程仓库的名字，这样你 push 的时候就可以用 origin 来代替 url 了
 
-### 5.4 推送到远程仓库
+### 5.5 推送到远程仓库
 
 比如你要更新到远程仓库，就可以使用 `git push ` 根据提示操作
 
@@ -306,15 +334,15 @@ origin 代表远程仓库的名字，这样你 push 的时候就可以用 origin
 
 如果在远程仓库上新增一行内容，![image-20220825212157179](https://zt0729-picture-bed.oss-cn-beijing.aliyuncs.com/ii/image-20220825212157179.png)然后还是提交下 commit。
 
-### 5.5 拉取远程仓库到本地仓库
+### 5.6 拉取远程仓库到本地仓库
 
 我们可以使用 `git fetch`，我们的本地文件是暂时不会发生变动的，只是拉到了本地版本库，fetch 是可以指定远程仓库和分支名的。
 
-### 5.6 本地厂库与远程仓库对比
+### 5.7 本地厂库与远程仓库对比
 
 我们想知道本地版本库和远程仓库的区别，这时候就需要用到git diff，直接在后面加上远程仓库名和分支名就可以看到区别了。![image-20220825212715317](https://zt0729-picture-bed.oss-cn-beijing.aliyuncs.com/ii/image-20220825212715317.png)
 
-### 5.7 远程厂库拉取到工作区
+### 5.8 远程厂库拉取到工作区
 
 如果没问题就直接用git pull把远程仓库的内容直接整合到工作区，这个时候如果我们使用git log就可以看到所有的历史版本了。而且本地文件也已经被修改了。
 
